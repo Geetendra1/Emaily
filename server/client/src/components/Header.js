@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import Payments from "./Payments";
 class Header extends Component {
   renderContent() {
     switch (this.props.auth) {
@@ -14,16 +14,30 @@ class Header extends Component {
           </li>
         );
       default:
-        return (
-          <li>
+        return [
+          <li key="1">
+            <Payments />
+          </li>,
+          <button
+            key="2"
+            style={{ margin: "0 10px", backgroundColor: "#15DF97" }}
+            className="btn"
+          >
+            Credits: {this.props.auth.credits}
+          </button>,
+          <button
+            key="3"
+            style={{ margin: "0 10px", backgroundColor: "#15DF97" }}
+            className="btn"
+          >
             <a href="/api/logout">logout</a>
-          </li>
-        );
+          </button>
+        ];
     }
   }
   render() {
     return (
-      <nav>
+      <nav style={{ background: "#707B7C" }}>
         <div className="nav-wrapper">
           <Link
             to={this.props.auth ? "/surveys" : "/"}
